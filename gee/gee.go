@@ -127,3 +127,10 @@ func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	c.engine = engine
 	engine.router.handle(c)
 }
+
+func Default() *Engine {
+	engine := New()
+	// 使用打日志和错误恢复中间件
+	engine.Use(Logger(), Recovery())
+	return engine
+}
